@@ -1,0 +1,23 @@
+{
+  "name": "saveversioning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickakey/saveVersioning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickakey/saveVersioning/issues"
+  },
+  "homepage": "https://github.com/nickakey/saveVersioning#readme",
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "prompt": "^1.3.0"
+  }
+}

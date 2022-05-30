@@ -19,10 +19,11 @@ const main = async () => {
             const pathToFolder = result.pathToFolder;
             const intervalInMinutes = result.intervalInMinutes;
 
-            const newFolderName = new Date().toLocaleTimeString();
-            const newFolderPath = `/${goUpOneLevel(pathToFolder)}/${newFolderName}`;
-
-            setTimeout(async () => {
+            setInterval(async () => {
+                const newFolderName = new Date().toLocaleTimeString();
+                const newFolderPath = `/${goUpOneLevel(
+                    pathToFolder
+                )}/backup:${newFolderName}`;
                 try {
                     await fs.mkdir(newFolderPath);
                     await fs.copy(pathToFolder, newFolderPath);
@@ -30,7 +31,7 @@ const main = async () => {
                 } catch (err) {
                     console.log(`aborted ERROR ${err}`);
                 }
-            }, intervalInMinutes * 60);
+            }, intervalInMinutes * 1000 * 60);
         }
     );
 };

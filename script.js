@@ -1,11 +1,12 @@
 const fs = require("fs-extra");
 resolve = require("path").resolve;
+const path = require('path');
 
 const prompt = require("prompt");
 
 prompt.start();
 
-const goUpOneLevel = (path) => path.split("/").slice(1, -1).join("/");
+const goUpOneLevel = (path) => "/" + path.split("/").slice(1, -1).join("/");
 
 const main = async () => {
     prompt.get(
@@ -16,14 +17,20 @@ const main = async () => {
             if (err) {
                 return console.log(err);
             }
-            const pathToFolder = result.pathToFolder;
+            const pathToFolder = "/Program Files (x86)/Steam/steamapps/common/Subnautica/SNAppData/SavedGames";
             const intervalInMinutes = result.intervalInMinutes;
 
             setInterval(async () => {
-                const newFolderName = new Date().toLocaleTimeString();
-                const newFolderPath = `/${goUpOneLevel(
-                    pathToFolder
-                )}/backup:${newFolderName}`;
+
+                console.log({pathToFolder, upOneLevel: goUpOneLevel(pathToFolder)})
+
+                const newFolderName = new Date().toLocaleTimeString().replaceAll(":", "-");
+                const newFolderPath = path.join(
+                    goUpOneLevel(pathToFolder), `${newFolderName}`);
+
+                
+                console.log({pathToFolder})
+                console.log({newFolderPath})
                 try {
                     await fs.mkdir(newFolderPath);
                     await fs.copy(pathToFolder, newFolderPath);
@@ -37,3 +44,5 @@ const main = async () => {
 };
 
 main();
+
+///Program Files (x86)/Steam/steamapps/common/Subnautica/SNAppData/SavedGames
